@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>微信商城</title>
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="Cache-Control" content="no-siteapp" />
+        <link rel="icon" type="image/png" href="/theme/default/images/favicon.png">
+        <link href="css/amazeui.min.css" rel="stylesheet" type="text/css" />
+        <link href="css/style.css" rel="stylesheet" type="text/css" />
+        <script src="js/area.js"></script>
+    </head>
+    <body>
+        <header data-am-widget="header" class="am-header am-header-default sq-head ">
+            <div class="am-header-left am-header-nav">
+                <a href="javascript:history.back()" class="">
+                    <i class="am-icon-chevron-left"></i>
+                </a>
+            </div>
+            <h1 class="am-header-title">
+                <a href="" class=""><#if address ??>修改<#else>新增</#if>收货地址</a>
+            </h1>
+        </header>
+        <div style="height: 49px;"></div>
+        <ul class="address">
+            <#if address ??>
+            <li>
+                <span>收货人：</span>
+                <input type="text" class="add-input" value="${address.receiver}"/>
+            </li>
+            <li>
+                <span>手&nbsp;&nbsp;&nbsp;机：</span>
+                <input type="text" class="add-input" value="${address.phone}" />
+            </li>
+            <li>
+                <span>地&nbsp;&nbsp;&nbsp;址：</span>
+                <textarea  class="add-select" name="" rows="" cols="" value="${address.address}"></textarea> 
+            </li>
+            <#else>
+             <li>
+                <span>收货人：</span>
+                <input type="text" class="add-input" />
+            </li>
+            <li>
+                <span>手&nbsp;&nbsp;&nbsp;机：</span>
+                <input type="text" class="add-input" />
+            </li>
+            <li>
+                <span>地&nbsp;&nbsp;&nbsp;址：</span>
+                <textarea  class="add-select" name="" rows="" cols=""></textarea> 
+            </li>
+            </#if>
+        </ul>
+        <input type="button" class="login-btn" value="确认提交">
+        <script type="text/javascript">_init_area();</script>
+    </body>
+</html>

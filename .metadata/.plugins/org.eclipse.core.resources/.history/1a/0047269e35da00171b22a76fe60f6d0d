@@ -1,0 +1,21 @@
+package lvzhn.component.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import lvzhn.component.dao.RollAdDao;
+import lvzhn.component.service.IAddressService;
+import lvzhn.entity.Address;
+
+@Service
+public class AddressService implements IAddressService {
+
+	@Autowired
+	RollAdDao rollAdDao;
+	
+	public List<Address> selectByUserId(Integer userid) {
+		return null;
+	}
+}

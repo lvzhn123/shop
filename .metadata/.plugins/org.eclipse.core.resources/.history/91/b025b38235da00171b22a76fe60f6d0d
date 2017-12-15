@@ -1,0 +1,11 @@
+package lvzhn.component.service.impl;
+
+import java.util.List;
+
+import lvzhn.component.service.IAddressService;
+import lvzhn.entity.Address;
+
+public class AddressService implements IAddressService {
+
+	List<Address> selectByUserId(Integer userid);
+}

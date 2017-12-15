@@ -1,0 +1,11 @@
+package lvzhn.component.service;
+
+import java.util.List;
+
+import lvzhn.entity.Address;
+
+public interface IAddressService {
+	List<Address> selectByUserId(Integer userid);
+	
+	void updateDefaultAddress(Integer addressId);
+}

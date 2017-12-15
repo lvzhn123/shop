@@ -1,0 +1,30 @@
+package lvzhn.action;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import lvzhn.component.service.IGoodsService;
+import lvzhn.core.WebResponse;
+import lvzhn.core.enums.Success;
+import lvzhn.entity.Goods;
+
+@RestController
+public class AddressAction {
+
+	@Autowired
+	IGoodsService goodsService;
+	
+	//更改默认地址
+	@RequestMapping("/updateDefault")
+	WebResponse doLogin(@RequestParam("addressId") int addressId) {
+
+		WebResponse wr = new WebResponse();
+		
+		wr.setSuccess(Success.success);
+		return wr;
+	}
+}

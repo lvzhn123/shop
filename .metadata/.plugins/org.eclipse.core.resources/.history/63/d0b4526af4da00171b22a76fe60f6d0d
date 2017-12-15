@@ -1,0 +1,10 @@
+package lvzhn.action;
+
+import org.springframework.web.bind.annotation.RestController;
+
+import lvzhn.component.controller.BaseController;
+
+@RestController
+public class OrderAction extends BaseController {
+
+}

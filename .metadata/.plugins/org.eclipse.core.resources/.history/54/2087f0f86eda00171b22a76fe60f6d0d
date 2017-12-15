@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>微信商城</title>
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="Cache-Control" content="no-siteapp" />
+        <link rel="icon" type="image/png" href="/theme/default/images/favicon.png">
+        <link href="css/amazeui.min.css" rel="stylesheet" type="text/css" />
+        <link href="css/style.css" rel="stylesheet" type="text/css" />
+        <script src="js/jquery.min.js"></script>
+        <script src="js/area.js"></script>
+    </head>
+    <body>
+        <header data-am-widget="header" class="am-header am-header-default sq-head ">
+            <div class="am-header-left am-header-nav">
+                <a href="javascript:history.back()" class="">
+                    <i class="am-icon-chevron-left"></i>
+                </a>
+            </div>
+            <h1 class="am-header-title">
+                <a href="" class=""><#if address ??>修改<#else>新增</#if>收货地址</a>
+            </h1>
+        </header>
+        <div style="height: 49px;"></div>
+        <ul class="address">
+            <#if address ??>
+            <li>
+                <span>收货人：</span>
+                <input type="text" id="receiver" class="add-input" value="${address.receiver}"/>
+            </li>
+            <li>
+                <span>手&nbsp;&nbsp;&nbsp;机：</span>
+                <input type="text" id="phone" class="add-input" value="${address.phone}" />
+            </li>
+            <li>
+                <span>地&nbsp;&nbsp;&nbsp;址：</span>
+                <textarea  id="address" class="add-select" name="" rows="" cols="" >${address.address}</textarea> 
+            </li>
+            <#else>
+             <li>
+                <span>收货人：</span>
+                <input id="receiver" type="text" class="add-input" />
+            </li>
+            <li>
+                <span>手&nbsp;&nbsp;&nbsp;机：</span>
+                <input  id="phone" type="text" class="add-input" />
+            </li>
+            <li>
+                <span>地&nbsp;&nbsp;&nbsp;址：</span>
+                <textarea  id="address" class="add-select" name="" rows="" cols=""></textarea> 
+            </li>
+            </#if>
+        </ul>
+        <input type="button" class="login-btn" id="submit" value="确认提交">
+        <script type="text/javascript">_init_area();</script>
+    </body>
+    <script>
+    $('#submit').bind('click',function(){
+            var receiver = $('#receiver').val();
+            var phone = $('#phone').val();
+            if(!(/^1[34578]\d{9}$/.test(phone))){ 
+                alert("手机号码有误，请重填");  
+                return false; 
+            }
+            var address = $('#address').html();
+            var addressId = 0;
+            <#if address ??>
+            addressId = ${address.id};
+            </#if>
+            $.ajax({url:"/saveAddress",data:{receiver:receiver,phone:phone,address:address,addressId:addressId},success:function(datas){
+                history.back();
+            }});
+    })
+     function goback(){
+            var b = new Base64(); 
+            window.location.href=b.decode('${backUrl}');
+        }
+    </script>
+</html>

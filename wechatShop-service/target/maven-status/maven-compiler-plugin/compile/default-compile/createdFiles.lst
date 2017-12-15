@@ -1,0 +1,4 @@
+lvzhn\component\service\impl\BaseService.class
+lvzhn\component\commonService\DispatchService.class
+lvzhn\component\service\IGoodsService.class
+lvzhn\component\service\impl\GoodsService.class

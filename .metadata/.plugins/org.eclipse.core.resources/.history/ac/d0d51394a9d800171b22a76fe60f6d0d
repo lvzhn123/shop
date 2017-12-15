@@ -1,0 +1,80 @@
+package lvzhn.component.controller;
+
+import java.util.List;
+import java.util.Map;
+
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import lvzhn.component.service.IGoodsService;
+import lvzhn.component.service.IShopCartService;
+import lvzhn.component.service.impl.BaseService;
+import lvzhn.core.utils.ConverterUtils;
+import lvzhn.entity.Goods;
+import lvzhn.entity.GoodsClass;
+import lvzhn.entity.RollAd;
+import lvzhn.entity.ShopCart;
+
+@Controller
+@EnableAutoConfiguration
+@ComponentScan(basePackages = { "lvzhn.component.service", "lvzhn.action", "lvzhn.configure" })
+@MapperScan("lvzhn.component.dao")
+@EnableTransactionManagement
+public class PageController extends BaseController {
+
+	@Autowired
+	BaseService baseService;
+
+	@Autowired
+	IGoodsService goodsService;
+
+	@Autowired
+	IShopCartService shopCartService;
+
+	@RequestMapping("/index")
+	String index(Map data) {
+		List<RollAd> rollads = baseService.getAllRollAD();
+		data.put("rollads", rollads);
+		List<Goods> hotsellGoods = goodsService.getHotSellGoods();
+		data.put("hotsellGoods", hotsellGoods);
+		return "index";
+	}
+
+	@RequestMapping("/category")
+	String category(Map data) {
+		List<GoodsClass> goodsClass = goodsService.getAllGoodsClass();
+		data.put("goodsClass", goodsClass);
+		return "category";
+	}
+
+	@RequestMapping("/goodsDetail")
+	String goodsDetail(Map data) {
+		Integer goodsId = ConverterUtils.toInt(this.context.getRequest().getParameter("goodsId"));
+		Goods goods = goodsService.selectByPrimaryKey(goodsId);
+		data.put("goods", goods);
+		return "goodsDetail";
+	}
+
+	@RequestMapping("/login")
+	String login(Map data) {
+		return "login";
+	}
+
+	@RequestMapping("/shopCart")
+	String shopCart(Map data) {
+		int userId = ConverterUtils.toInt(this.context.getRequest().getSession().getAttribute("userId"));
+		ShopCart shopCart = shopCartService.queryCartsByUserId(userId);
+		data.put("shopCart", shopCart);
+		return "shopCart";
+	}
+
+	public static void main(String[] args) throws Exception {
+		SpringApplication.run(PageController.class, args);
+	}
+}

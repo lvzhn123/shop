@@ -1,0 +1,10 @@
+package lvzhn.component.service.impl;
+
+import org.springframework.stereotype.Service;
+
+import lvzhn.component.service.IOrderService;
+
+@Service
+public class OrderService implements IOrderService {
+
+}

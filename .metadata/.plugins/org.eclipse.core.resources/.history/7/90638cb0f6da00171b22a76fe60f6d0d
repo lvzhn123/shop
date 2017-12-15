@@ -1,0 +1,36 @@
+package lvzhn.component.service.impl;
+
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import lvzhn.component.dao.OrderDao;
+import lvzhn.component.dao.OrderDetailDao;
+import lvzhn.component.service.IOrderService;
+import lvzhn.core.utils.ConverterUtils;
+import lvzhn.entity.Order;
+
+@Service
+public class OrderService implements IOrderService {
+
+	@Autowired
+	OrderDao orderDao;
+
+	@Autowired
+	OrderDetailDao orderDetailDao;
+
+	public void SaveOrder(int userid, Map order, List<Map> odList) {
+		// TODO Auto-generated method stub
+		Order record = new Order();
+		record.setAddress(ConverterUtils.toString(order.get("address")));
+		record.setUserid(userid);
+		record.setAmount(new BigDecimal(ConverterUtils.toString(order.get("amount"))));
+		record.setPayway(ConverterUtils.toString(order.get("payWay")));
+		record.setId(orderDao.selectid());
+		
+	}
+
+}

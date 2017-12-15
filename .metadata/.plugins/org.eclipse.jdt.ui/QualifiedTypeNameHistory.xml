@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="lvzhn.core.utils.ConverterUtils"/>
+<fullyQualifiedTypeName name="javax.servlet.http.Cookie"/>
+<fullyQualifiedTypeName name="lvzhn.entity.User"/>
+<fullyQualifiedTypeName name="lvzhn.core.enums.Success"/>
+<fullyQualifiedTypeName name="lvzhn.core.Context"/>
+<fullyQualifiedTypeName name="lvzhn.component.dao.ShopCartDetailDao"/>
+<fullyQualifiedTypeName name="lvzhn.entity.Address"/>
+<fullyQualifiedTypeName name="lvzhn.entity.Order"/>
+<fullyQualifiedTypeName name="lvzhn.core.utils.JsonTools"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+</qualifiedTypeNameHistroy>

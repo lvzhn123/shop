@@ -1,0 +1,50 @@
+package lvzhn.action;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import lvzhn.component.controller.BaseController;
+import lvzhn.component.service.IAddressService;
+import lvzhn.core.WebResponse;
+import lvzhn.core.enums.Success;
+
+@RestController
+public class AddressAction extends BaseController {
+
+	@Autowired
+	IAddressService addressService;
+
+	// 更改默认地址
+	@RequestMapping("/updateDefault")
+	WebResponse updateDefault(@RequestParam("addressId") int addressId) {
+
+		WebResponse wr = new WebResponse();
+		int userid = getUserId();
+		addressService.updateDefaultAddress(userid, addressId);
+		wr.setSuccess(Success.success);
+		return wr;
+	}
+	
+	// 更改默认地址
+	@RequestMapping("/deleteAddr")
+	WebResponse deleteAddr(@RequestParam("addressId") int addressId) {
+		WebResponse wr = new WebResponse();
+		addressService.deleteByPrimaryKey(addressId);
+		wr.setSuccess(Success.success);
+	
+		return wr;
+	}
+	//保存收货地址
+	@RequestMapping("/saveAddress")
+	WebResponse saveAddress(@RequestParam("receiver") String receiver,
+			@RequestParam("phone") String phone,
+			@RequestParam("address") String address,
+			@RequestParam("type") String type) {
+		WebResponse wr = new WebResponse();
+		addressService.deleteByPrimaryKey(addressId);
+		wr.setSuccess(Success.success);
+		return wr;
+	}
+}

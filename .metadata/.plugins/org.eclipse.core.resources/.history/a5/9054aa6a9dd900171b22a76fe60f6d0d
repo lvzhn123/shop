@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>商品详情</title>
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="Cache-Control" content="no-siteapp" />
+        <link rel="icon" type="image/png" href="/theme/default/images/favicon.png">
+        <link href="css/amazeui.min.css" rel="stylesheet" type="text/css" />
+        <link href="css/style.css" rel="stylesheet" type="text/css" />
+        <link href="css/main.css" rel="stylesheet" type="text/css" />
+        <script src="js/jquery-1.10.2.min.js"></script>
+        <script src="js/sysmaths.js"></script>
+        <script src="js/main.js"></script>
+    </head>
+    <body>
+        <header data-am-widget="header" class="am-header am-header-default sq-head ">
+            <div class="am-header-left am-header-nav">
+                <a href="javascript:history.back()" class="">
+                    <i><img src="images/arow.png"/></i>
+                </a>
+            </div>
+            <h1 class="am-header-title">
+                <a href="" class="">商品详情</a>
+            </h1>
+        </header>
+        <!--图片信息-->
+        <div class="am-slider am-slider-default" data-am-flexslider id="demo-slider-0">
+          <ul class="am-slides">
+            <li><img src="images/${goods.pictureurl!''}" /></li>
+          </ul>
+        </div>
+        <div class="detal-info">
+            <p>${goods.name!''}</p>
+            <h4>价格：<span style="color: #B41C2C;font-size: 2.2rem;" id="pri">${goods.stdptrice?string.currency} </span><span class="line-through">${goods.marketprice?string.currency}</span></h2>
+        </div>
+        <div class="d-amount">
+            <h4>数量：</h4>
+            <div class="d-stock">
+              <a class="decrease">-</a>
+                <input id="num"  class="text_box" name="" type="text" onkeypress="uptnum()" onkeyup="chgnum()" value="0">
+                <input id="id" type="hidden" value="644">
+                <a class="increase">+</a>
+               <span id="dprice" class="price" style="display:none"> 36</span>
+            </div>
+        </div>
+        <div class="detal-info">
+            <h4>总金额：<span id="totalprice">￥0</span></h4>
+        </div>
+ <div style=" height: 65px;">
+    
+ </div>
+ <div class="fix-shopping">
+    <div style="width:30%;height:50px;background-color:#FFFFAA;
+        float: left;">
+        <span style="display: block; ">
+            <img src="images/hom.png" 
+                style="vertical-align: middle;display:block;margin: 4px auto 0;width=24px;height: 24px;" href="index"/>
+        </span>
+        <span style="display: block;font-size: 12px;color: #222222;text-align: center;">首页</span>
+        
+        </div>
+        <a class="imm-buy" onclick="buyNow()">立即购买</a>
+        <a class="imm-buy cd-add-to-cart" style="background-color:#FDB325 ;" onclick="addToShopCart()">加入购物车</a>
+ </div>
+ 
+ <script>
+    function buyNow(){
+
+    }
+
+    function addToShopCart(){
+        if($('#num').val() == 0){
+            alert('请至少购买一件商品！');
+            return false;
+        }
+        $.ajax({url:"/addToShopCart",data:{goodsId:${goods.goodsid},price:${goods.stdptrice},num:$('#num').val()},success:function(datas){
+                    alert('加入购物车成功！')
+            }});
+    }
+
+    //购物数量加减
+    $(function(){
+        $('.increase').click(function(){
+            var self = $(this);
+            var current_num = parseInt(self.siblings('input').val());
+            current_num += 1;
+            self.siblings('input').val(current_num);
+            var price = $('#pri').text().substring(1);
+            var totalpri = cal_money(current_num,price,2);
+            $('#totalprice').text("￥"+totalpri);
+            update_item(self.siblings('input').data('item-id'));
+            
+        })      
+        $('.decrease').click(function(){
+            var self = $(this);
+            var current_num = parseInt(self.siblings('input').val());
+            if(current_num > 1){
+                current_num -= 1;
+                self.siblings('input').val(current_num);
+                var price = $('#pri').text().substring(1);
+                var totalpri = cal_money(current_num,price,2);
+                $('#totalprice').text("￥"+totalpri);
+                update_item(self.siblings('input').data('item-id'));
+            }
+        })
+    })
+    //非正整数数据置零
+    function chgnum(){
+        var num = parseInt($('#num').val());
+        if(num<0||isNaN(num)){
+            $('#num').val("0");
+        }
+        var price = $('#pri').text().substring(1);
+        var current_num = $('#num').val();
+        var totalpri = cal_money(current_num,price,2);
+        $('#totalprice').text("￥"+totalpri);
+    }
+    function uptnum(){
+        var num = window.event.keyCode;
+        var oldnum=$('#num').val();
+        if(oldnum=='0'){
+           $('#num').val('');
+        }
+            
+    }
+</script>
+ 
+ 
+ 
+ 
+<script src="js/jquery.min.js"></script>
+<script src="js/amazeui.min.js"></script>
+    </body>
+</html>

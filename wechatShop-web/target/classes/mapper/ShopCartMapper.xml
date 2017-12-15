@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="lvzhn.component.dao.ShopCartDao" >
+  <resultMap id="BaseResultMap" type="lvzhn.entity.ShopCart" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="nums" property="nums" jdbcType="DECIMAL" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+  </resultMap>
+  
+  <resultMap id="queryForListMap" type="lvzhn.entity.ShopCart">  
+        <id column="id" property="id" jdbcType="INTEGER" />
+    	<result column="userId" property="userid" jdbcType="INTEGER" />
+    	<result column="nums" property="nums" jdbcType="DECIMAL" />
+    	<result column="amount" property="amount" jdbcType="DECIMAL" /> 
+        <collection property="shopCartDetails" javaType="java.util.List" ofType="lvzhn.entity.ShopCartDetail">  
+            <id column="d_id" property="id" jdbcType="INTEGER" />
+    		<result column="d_id" property="nums" jdbcType="DECIMAL" />
+    		<result column="d_price" property="price" jdbcType="DECIMAL" />
+    		<result column="d_amount" property="amount" jdbcType="DECIMAL" />
+    		<association property="goods" column="goodsId"   
+            javaType="lvzhn.entity.Goods"> 
+               <id column="g_goodsid" property="goodsid" jdbcType="INTEGER" />
+    			<result column="g_goodsName" property="goodsname" jdbcType="VARCHAR" />
+    			<result column="g_stdPtrice" property="stdptrice" jdbcType="DECIMAL" />
+    			<result column="g_marketPrice" property="marketprice" jdbcType="DECIMAL" />
+    			<result column="g_pictureUrl" property="pictureurl" jdbcType="VARCHAR" />
+            </association> 
+        </collection>  
+    </resultMap>  
+   <select id="queryCartsByUserId" resultMap="queryForListMap" parameterType="java.lang.Integer" >  
+        SELECT  
+          s.id,  
+          s.userId,  
+          s.nums,
+          s.amount,   
+          d.id d_id,  
+          d.nums d_id,  
+          d.price d_price,  
+          d.amount d_amount,  
+          d.goodsId d_goodsid,
+          g.goodsid g_goodsid,
+          g.goodsname g_goodsname,
+          g.stdPtrice g_stdPtrice,
+          g.marketPrice g_marketPrice,
+          g.pictureUrl g_pictureUrl
+        FROM  
+          shopcart s 
+        LEFT JOIN  
+          shopcartdetail d 
+        ON  
+          s.id = d.sid
+        LEFT JOIN
+          goods g
+        ON 
+          d.goodsId = g.goodsid
+        where 
+          s.userid = #{userid,jdbcType=INTEGER}
+    </select>   
+  <sql id="Base_Column_List" >
+    id, userId, nums, amount
+  </sql>
+  
+  <select id="selectid" resultType="java.lang.Integer">  
+    select case when max(id)+1 is Null then 1 else max(id)+1 end from shopcart 
+  </select>  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from shopcart
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from shopcart
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="lvzhn.entity.ShopCart" >
+    insert into shopcart (id, userId, nums, 
+      amount)
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{nums,jdbcType=DECIMAL}, 
+      #{amount,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="lvzhn.entity.ShopCart" >
+    insert into shopcart
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="nums != null" >
+        nums,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="nums != null" >
+        #{nums,jdbcType=DECIMAL},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="lvzhn.entity.ShopCart" >
+    update shopcart
+    <set >
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="nums != null" >
+        nums = #{nums,jdbcType=DECIMAL},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="lvzhn.entity.ShopCart" >
+    update shopcart
+    set userId = #{userid,jdbcType=INTEGER},
+      nums = #{nums,jdbcType=DECIMAL},
+      amount = #{amount,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

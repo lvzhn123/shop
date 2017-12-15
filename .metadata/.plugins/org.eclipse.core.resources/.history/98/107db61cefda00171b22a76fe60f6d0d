@@ -1,0 +1,7 @@
+package lvzhn.action;
+
+import lvzhn.component.controller.BaseController;
+
+public class OrderAction extends BaseController {
+
+}

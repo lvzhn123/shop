@@ -1,0 +1,21 @@
+package lvzhn.component.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import lvzhn.component.dao.OrderDao;
+import lvzhn.component.dao.OrderDetailDao;
+import lvzhn.component.service.IOrderService;
+
+@Service
+public class OrderService implements IOrderService {
+
+	@Autowired
+	OrderDao orderDao;
+
+	@Autowired
+	OrderDetailDao orderDetailDao;
+	
+	
+
+}

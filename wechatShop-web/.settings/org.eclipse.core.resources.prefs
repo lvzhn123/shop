@@ -1,0 +1,9 @@
+eclipse.preferences.version=1
+encoding//src/main/resources/templates/address.ftl=UTF-8
+encoding//src/main/resources/templates/category.ftl=UTF-8
+encoding//src/main/resources/templates/gladdress.ftl=UTF-8
+encoding//src/main/resources/templates/goodsDetail.ftl=UTF-8
+encoding//src/main/resources/templates/index.ftl=UTF-8
+encoding//src/main/resources/templates/login.ftl=UTF-8
+encoding//src/main/resources/templates/order.ftl=UTF-8
+encoding//src/main/resources/templates/shopCart.ftl=UTF-8

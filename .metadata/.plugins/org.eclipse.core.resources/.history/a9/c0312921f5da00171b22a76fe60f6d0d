@@ -1,0 +1,6 @@
+package lvzhn.component.service;
+
+public interface IOrderService {
+
+	void SaveOrder();
+}

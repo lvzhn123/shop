@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;wechatShop-web/src/main/resources/templates/order&apos; to &apos;order.ftl&apos;" description="Rename resource &apos;order&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/resources/templates/order" name="order.ftl" stamp="1512364419091" updateReferences="true"/>
+</session>

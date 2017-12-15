@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="lvzhn.component.dao.GoodsDao" >
+  <resultMap id="BaseResultMap" type="lvzhn.entity.Goods" >
+    <id column="goodsid" property="goodsid" jdbcType="INTEGER" />
+    <result column="goodsName" property="goodsname" jdbcType="VARCHAR" />
+    <result column="stdPtrice" property="stdptrice" jdbcType="DECIMAL" />
+    <result column="marketPrice" property="marketprice" jdbcType="DECIMAL" />
+    <result column="pictureUrl" property="pictureurl" jdbcType="VARCHAR" />
+    <result column="stockNums" property="stocknums" jdbcType="DECIMAL" />
+    <result column="classId" property="classid" jdbcType="INTEGER" />
+    <result column="ishotSell" property="ishotsell" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    goodsid, goodsName, stdPtrice, marketPrice, pictureUrl, stockNums, classId, ishotSell
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from goods
+    where goodsid = #{goodsid,jdbcType=INTEGER}
+  </select>
+  <select id="getGoodsByClassId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from goods
+    where classId = #{classId,jdbcType=INTEGER}
+  </select>
+  <select id=" getGoodsByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from goods
+    where name like '%#{name,jdbcType=VARCHAR}%'
+  </select>
+ 
+   <select id="getHotSellGoods" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from goods
+    where ishotSell = '1'
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from goods
+    where goodsid = #{goodsid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="lvzhn.entity.Goods" >
+    insert into goods (goodsid, goodsName, stdPtrice, 
+      marketPrice, pictureUrl, stockNums, 
+      classId, ishotSell)
+    values (#{goodsid,jdbcType=INTEGER}, #{goodsname,jdbcType=VARCHAR}, #{stdptrice,jdbcType=DECIMAL}, 
+      #{marketprice,jdbcType=DECIMAL}, #{pictureurl,jdbcType=VARCHAR}, #{stocknums,jdbcType=DECIMAL}, 
+      #{classid,jdbcType=INTEGER}, #{ishotsell,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="lvzhn.entity.Goods" >
+    insert into goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodsid != null" >
+        goodsid,
+      </if>
+      <if test="goodsname != null" >
+        goodsName,
+      </if>
+      <if test="stdptrice != null" >
+        stdPtrice,
+      </if>
+      <if test="marketprice != null" >
+        marketPrice,
+      </if>
+      <if test="pictureurl != null" >
+        pictureUrl,
+      </if>
+      <if test="stocknums != null" >
+        stockNums,
+      </if>
+      <if test="classid != null" >
+        classId,
+      </if>
+      <if test="ishotsell != null" >
+        ishotSell,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodsid != null" >
+        #{goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsname != null" >
+        #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="stdptrice != null" >
+        #{stdptrice,jdbcType=DECIMAL},
+      </if>
+      <if test="marketprice != null" >
+        #{marketprice,jdbcType=DECIMAL},
+      </if>
+      <if test="pictureurl != null" >
+        #{pictureurl,jdbcType=VARCHAR},
+      </if>
+      <if test="stocknums != null" >
+        #{stocknums,jdbcType=DECIMAL},
+      </if>
+      <if test="classid != null" >
+        #{classid,jdbcType=INTEGER},
+      </if>
+      <if test="ishotsell != null" >
+        #{ishotsell,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="lvzhn.entity.Goods" >
+    update goods
+    <set >
+      <if test="goodsname != null" >
+        goodsName = #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="stdptrice != null" >
+        stdPtrice = #{stdptrice,jdbcType=DECIMAL},
+      </if>
+      <if test="marketprice != null" >
+        marketPrice = #{marketprice,jdbcType=DECIMAL},
+      </if>
+      <if test="pictureurl != null" >
+        pictureUrl = #{pictureurl,jdbcType=VARCHAR},
+      </if>
+      <if test="stocknums != null" >
+        stockNums = #{stocknums,jdbcType=DECIMAL},
+      </if>
+      <if test="classid != null" >
+        classId = #{classid,jdbcType=INTEGER},
+      </if>
+      <if test="ishotsell != null" >
+        ishotSell = #{ishotsell,jdbcType=CHAR},
+      </if>
+    </set>
+    where goodsid = #{goodsid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="lvzhn.entity.Goods" >
+    update goods
+    set goodsName = #{goodsname,jdbcType=VARCHAR},
+      stdPtrice = #{stdptrice,jdbcType=DECIMAL},
+      marketPrice = #{marketprice,jdbcType=DECIMAL},
+      pictureUrl = #{pictureurl,jdbcType=VARCHAR},
+      stockNums = #{stocknums,jdbcType=DECIMAL},
+      classId = #{classid,jdbcType=INTEGER},
+      ishotSell = #{ishotsell,jdbcType=CHAR}
+    where goodsid = #{goodsid,jdbcType=INTEGER}
+  </update>
+</mapper>

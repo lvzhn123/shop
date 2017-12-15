@@ -1,0 +1,7 @@
+package lvzhn.component.service.impl;
+
+import lvzhn.component.service.IAddressService;
+
+public class AddressService implements IAddressService {
+
+}

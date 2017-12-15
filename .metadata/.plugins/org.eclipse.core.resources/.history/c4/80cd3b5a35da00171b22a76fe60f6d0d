@@ -1,0 +1,5 @@
+package lvzhn.component.service.impl;
+
+public class AddressService {
+
+}

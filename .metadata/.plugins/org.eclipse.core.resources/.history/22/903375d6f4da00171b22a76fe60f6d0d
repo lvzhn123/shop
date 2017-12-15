@@ -1,0 +1,23 @@
+package lvzhn.action;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import lvzhn.component.controller.BaseController;
+import lvzhn.core.WebResponse;
+import lvzhn.core.enums.Success;
+
+@RestController
+public class OrderAction extends BaseController {
+
+	// ×¢Ïú
+	@RequestMapping("/saveOrder")
+	WebResponse saveOrder() {
+		WebResponse wr = new WebResponse();
+		wr.setSuccess(Success.success);
+		
+		return wr;
+
+	}
+	
+}

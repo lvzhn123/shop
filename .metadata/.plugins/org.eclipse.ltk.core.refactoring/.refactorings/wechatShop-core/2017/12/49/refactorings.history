@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;lvzhn.core.utils.JsonToolds&apos; to &apos;JsonTools&apos;&#x0D;&#x0A;- Original project: &apos;wechatShop-core&apos;&#x0D;&#x0A;- Original element: &apos;lvzhn.core.utils.JsonToolds&apos;&#x0D;&#x0A;- Renamed element: &apos;lvzhn.core.utils.JsonTools&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;JsonToolds&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src\/main\/java&lt;lvzhn.core.utils{JsonToolds.java[JsonToolds" matchStrategy="1" name="JsonTools" qualified="false" references="true" similarDeclarations="false" stamp="1512617226065" textual="false" version="1.0"/>
+</session>
